@@ -89,6 +89,11 @@ def uses_available_letters(word, letter_bank):
     return True
 
 def score_word(word):
+    """
+    Score the word from user input
+    Parameters: word as a string of chars
+    output: int (number of points)    
+    """
     # create LETTER_VALUES as a global variable outside (see top)
     # iterate through word string, find points for each char and add them up, check length for extra points
     score = 0
