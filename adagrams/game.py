@@ -104,4 +104,35 @@ def score_word(word):
     return score
 
 def get_highest_word_score(word_list):
-    pass
+    """
+    Find word with highest score
+    Parameter: a list of strings
+    Output: a tuple with a string and the score    
+    """
+    # calculate score for each word and store in word_scores dict, also update highest score
+    word_scores = {}
+    highest_score = 0
+    for word in word_list:
+        score = score_word(word)
+        word_scores[word] = score
+        if score > highest_score:
+            highest_score = score
+    # loop through the word_list, find all words with highest score
+    words_with_highest_score = []
+    for word in word_list:
+        if word_scores[word] == highest_score:
+            words_with_highest_score.append(word)
+    
+    winning_word = words_with_highest_score[0]
+    # return if no ties
+    if len(words_with_highest_score) == 1:
+        return (winning_word, highest_score)
+    # find the shortest word, also check if length of 10 exists    
+    smallest_length = len(winning_word)
+    for word in words_with_highest_score:
+        if len(word) == 10:
+            return (word, highest_score)
+        if len(word) < smallest_length:
+            winning_word = word
+            smallest_length = len(word)
+    return (winning_word, highest_score)
