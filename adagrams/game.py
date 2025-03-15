@@ -29,17 +29,31 @@ LETTER_POOL = {
     'Z': 1
 }
 def draw_letters():
-    #goal: generate a list of 10 letters randomly selected from LETTER_POOL
-    #step1: create a list of letters
-    all_letters = []
-    for letter in LETTER_POOL.keys():
-        all_letters.append(letter)
-    #step2:use iteration, generate 26 randomly nums (0-25) as index, select letters from list, append it to the new list
-    result = []
-    for i in range(10):
-        index = randint(0, 25)
-        result.append(all_letters[index])
-    return result
+    """
+    build a hand of 10 letters for the user
+    Parameters:    None
+    Returns:
+    a list of strings with single letters
+    """     
+    #step1: create a copy of the LETTER_POOL and save all keys in a list
+    letter_count_dict = {}
+    letter_list = []
+    for letter, count in LETTER_POOL.items():
+        letter_count_dict[letter] = count
+        letter_list.append(letter)
+    #step2:randomly pick 10 letters from the letter_pool: for each pick, update count, remove letter from letter_list if count gets to 0;  
+    hand = []
+    while len(hand) < 10:
+        index = randint(0, len(letter_list) - 1)
+        letter = letter_list[index]
+        count = letter_count_dict[letter] 
+        hand.append(letter)
+        letter_count_dict[letter] = count - 1
+        # new_count = count  - 1
+        if count == 1:
+            letter_list.pop(index)
+
+    return hand
 
 def uses_available_letters(word, letter_bank):
     pass
