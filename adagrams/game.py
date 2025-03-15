@@ -56,7 +56,27 @@ def draw_letters():
     return hand
 
 def uses_available_letters(word, letter_bank):
-    pass
+    """
+    Check if an input word from a user only used characters that are within the hand list
+    Parameters:
+    - word as a string
+    - letter_bank as a list of drawn letters in a hand
+    Return: boolean
+    """
+    # create letter_freq_dict for letters in letter_bank
+    letter_freq_dict = {}
+    for letter in letter_bank:
+        if letter in letter_freq_dict:
+            letter_freq_dict[letter] += 1
+        else:
+            letter_freq_dict[letter] = 1
+    # iterate through each character in word string and check if char exists and compare counts; update counts when finding a matching
+    for char in word.upper():
+        if not char in letter_freq_dict or letter_freq_dict[char] == 0:
+            return False
+        else:
+            letter_freq_dict[char] -= 1
+    return True
 
 def score_word(word):
     pass
